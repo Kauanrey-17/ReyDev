@@ -63,7 +63,7 @@ export function Hero() {
           <div className="relative inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-5 py-2">
             <span className="h-2 w-2 rounded-full bg-primary glow-dot animate-pulse-glow" />
             <span className="font-mono text-xs text-muted-foreground tracking-wider uppercase">
-              Disponivel para oportunidades
+              Empregado como jovem aprendiz na empresa Sabo/Camp oeste
             </span>
           </div>
         </div>

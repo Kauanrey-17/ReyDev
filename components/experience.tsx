@@ -1,6 +1,24 @@
-import { Briefcase, Radio, Heart, Lightbulb, Code2, ShoppingBag } from "lucide-react"
+"use client";
+
+import {
+  Radio,
+  Heart,
+  Lightbulb,
+  Code2,
+  ShoppingBag,
+  Factory,
+} from "lucide-react";
 
 const experiences = [
+  {
+    icon: Factory,
+    title: "Jovem Aprendiz",
+    company: "Sabó (via CAMP Oeste)",
+    type: "Presencial",
+    description:
+      "Atuando na Sabó, líder no setor de autopeças, em atividades que abrangem suporte administrativo e participação em projetos de melhoria de processos. Experiência focada em aprendizado prático e rotinas industriais multinacionais.",
+    tags: ["Administração", "Processos", "Indústria", "CAMP Oeste"],
+  },
   {
     icon: Code2,
     title: "Membro do Board Estudantil - Desenvolvimento",
@@ -46,13 +64,13 @@ const experiences = [
       "Participacao em acao social de arrecadacao e distribuicao de brinquedos para criancas de comunidades locais. Apoio logistico e organizacao da acao.",
     tags: ["Voluntariado", "Logistica", "Impacto Social"],
   },
-]
+];
 
 export function Experience() {
   return (
     <section id="experiencia" className="relative py-24 px-6">
       <div className="mx-auto max-w-6xl">
-        {/* Section header */}
+        {/* Header da Seção */}
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px flex-1 max-w-[60px] bg-primary/50" />
@@ -61,14 +79,13 @@ export function Experience() {
             </span>
           </div>
           <h2 className="text-3xl font-bold md:text-4xl">
-            Trajetoria{" "}
-            <span className="text-primary glow-text">profissional</span>
+            Trajetoria <span className="text-primary glow-text">profissional</span>
           </h2>
         </div>
 
         {/* Timeline */}
         <div className="relative">
-          {/* Vertical line */}
+          {/* Linha vertical central */}
           <div className="absolute left-6 top-0 bottom-0 w-px bg-border md:left-1/2 md:-translate-x-px" />
 
           <div className="flex flex-col gap-12">
@@ -79,46 +96,39 @@ export function Experience() {
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 } gap-8 md:gap-0`}
               >
-                {/* Timeline dot */}
+                {/* Ponto na timeline com brilho */}
                 <div className="absolute left-6 top-6 z-10 flex h-3 w-3 -translate-x-1/2 items-center justify-center md:left-1/2">
-                  <div className="h-3 w-3 rounded-full bg-primary glow-dot" />
+                  <div className="h-3 w-3 rounded-full bg-primary shadow-[0_0_10px_rgba(var(--primary),0.5)]" />
                 </div>
 
-                {/* Content card */}
-                <div
-                  className={`ml-12 md:ml-0 md:w-1/2 ${
-                    index % 2 === 0 ? "md:pr-12" : "md:pl-12"
-                  }`}
-                >
-                  <div className="rounded-lg border border-border bg-card/30 p-6 transition-all hover:border-primary/20 hover:bg-card/50">
-                    <div className="mb-3 flex items-center gap-3">
-                      <div className="inline-flex rounded-lg bg-primary/10 p-2">
-                        <exp.icon size={16} className="text-primary" />
+                {/* Card de Conteúdo */}
+                <div className={`ml-12 md:ml-0 md:w-1/2 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}>
+                  <div className="group relative rounded-xl border border-border bg-card/30 p-6 transition-all duration-300 hover:border-primary/50 hover:bg-card/50 glow-border">
+                    <div className="mb-4 flex items-center gap-3">
+                      <div className="inline-flex rounded-lg bg-primary/10 p-2 transition-colors group-hover:bg-primary/20">
+                        <exp.icon size={18} className="text-primary" />
                       </div>
                       <div>
-                        <span className="text-xs text-muted-foreground font-mono">
-                          {exp.company}
-                        </span>
-                        <span className="mx-2 text-border">|</span>
-                        <span className="text-xs text-muted-foreground font-mono">
-                          {exp.type}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-mono text-primary/80">{exp.company}</span>
+                        </div>
+                        <span className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest">{exp.type}</span>
                       </div>
                     </div>
 
-                    <h3 className="mb-2 font-semibold text-foreground text-pretty">
+                    <h3 className="mb-3 text-lg font-bold transition-colors group-hover:text-primary">
                       {exp.title}
                     </h3>
-
-                    <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
+                    
+                    <p className="mb-6 text-sm text-muted-foreground leading-relaxed">
                       {exp.description}
                     </p>
 
                     <div className="flex flex-wrap gap-2">
                       {exp.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full bg-primary/10 px-3 py-1 font-mono text-xs text-primary"
+                        <span 
+                          key={tag} 
+                          className="rounded-full border border-primary/10 bg-primary/5 px-3 py-1 font-mono text-[10px] text-primary transition-all group-hover:border-primary/30"
                         >
                           {tag}
                         </span>
@@ -127,7 +137,7 @@ export function Experience() {
                   </div>
                 </div>
 
-                {/* Spacer for opposite side */}
+                {/* Espaçador para o lado oposto */}
                 <div className="hidden md:block md:w-1/2" />
               </div>
             ))}
@@ -135,5 +145,5 @@ export function Experience() {
         </div>
       </div>
     </section>
-  )
+  );
 }

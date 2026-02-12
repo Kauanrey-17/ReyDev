@@ -1,5 +1,9 @@
-import { GraduationCap, BookOpen, Award } from "lucide-react"
+"use client";
 
+// 1. CORREÇÃO: Importação essencial dos ícones
+import { GraduationCap, BookOpen, Award } from "lucide-react";
+
+// Dados da Educação
 const education = [
   {
     icon: GraduationCap,
@@ -25,58 +29,24 @@ const education = [
     status: "Concluido",
     highlight: false,
   },
-]
+];
 
+// Dados das Certificações
 const certifications = [
-  {
-    name: "Fundamentos do Python 1",
-    institution: "Cisco Networking Academy",
-    hours: "30h",
-    year: "2025",
-  },
-  {
-    name: "Fundamentos do Hardware do Computador",
-    institution: "Cisco Networking Academy",
-    hours: "6h",
-    year: "2025",
-  },
-  {
-    name: "Ideathon 2025 Osasco",
-    institution: "Instituto SEBRAE",
-    hours: "8h",
-    year: "2025",
-  },
-  {
-    name: "Desafio Soul",
-    institution: "Desafio Soul",
-    hours: "15h",
-    year: "2024",
-  },
-  {
-    name: "Gestao Empresarial",
-    institution: "Microlins Lapa",
-    hours: "90h",
-    year: "2024",
-  },
-  {
-    name: "Meu Trampo e Empreender",
-    institution: "Instituto Besouro",
-    hours: "20h",
-    year: "2024",
-  },
-  {
-    name: "Formacao Socioeducativa para o Trabalho",
-    institution: "CAMP Oeste",
-    hours: "240h",
-    year: "2022",
-  },
-]
+  { name: "Fundamentos do Python 1", institution: "Cisco Networking Academy", hours: "30h", year: "2025" },
+  { name: "Fundamentos do Hardware do Computador", institution: "Cisco Networking Academy", hours: "6h", year: "2025" },
+  { name: "Ideathon 2025 Osasco", institution: "Instituto SEBRAE", hours: "8h", year: "2025" },
+  { name: "Desafio Soul", institution: "Desafio Soul", hours: "15h", year: "2024" },
+  { name: "Gestao Empresarial", institution: "Microlins Lapa", hours: "90h", year: "2024" },
+  { name: "Meu Trampo e Empreender", institution: "Instituto Besouro", hours: "20h", year: "2024" },
+  { name: "Formacao Socioeducativa para o Trabalho", institution: "CAMP Oeste", hours: "240h", year: "2022" },
+];
 
 export function Education() {
   return (
     <section id="formacao" className="relative py-24 px-6">
       <div className="mx-auto max-w-6xl">
-        {/* Section header */}
+        {/* Header com brilho no texto */}
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px flex-1 max-w-[60px] bg-primary/50" />
@@ -91,52 +61,58 @@ export function Education() {
         </div>
 
         <div className="grid gap-12 lg:grid-cols-2">
-          {/* Education */}
+          {/* Lado Esquerdo: Educação */}
           <div>
             <h3 className="mb-6 flex items-center gap-2 font-mono text-sm font-semibold text-primary tracking-wider uppercase">
               <GraduationCap size={16} />
               Formacao Academica
             </h3>
             <div className="flex flex-col gap-4">
-              {education.map((edu) => (
-                <div
-                  key={edu.course}
-                  className={`rounded-lg border p-6 transition-all hover:border-primary/20 ${
-                    edu.highlight
-                      ? "border-primary/30 bg-primary/5"
-                      : "border-border bg-card/30"
-                  }`}
-                >
-                  <div className="mb-2 flex items-center gap-2">
-                    <edu.icon
-                      size={16}
-                      className={edu.highlight ? "text-primary" : "text-muted-foreground"}
-                    />
-                    <span className="font-mono text-xs text-muted-foreground uppercase">
-                      {edu.level}
-                    </span>
+              {education.map((edu) => {
+                // 2. CORREÇÃO: Atribuir a uma constante com letra MAIÚSCULA para renderizar o ícone
+                const Icon = edu.icon;
+                return (
+                  <div
+                    key={edu.course}
+                    className={`group rounded-lg border p-6 transition-all duration-300 hover:bg-card/50 glow-border ${
+                      edu.highlight
+                        ? "border-primary/50 bg-primary/5 shadow-[0_0_15px_rgba(var(--primary),0.1)]"
+                        : "border-border bg-card/30 hover:border-primary/30"
+                    }`}
+                  >
+                    <div className="mb-2 flex items-center gap-2">
+                      <Icon
+                        size={16}
+                        className={`transition-colors ${edu.highlight ? "text-primary" : "text-muted-foreground group-hover:text-primary"}`}
+                      />
+                      <span className="font-mono text-xs text-muted-foreground uppercase">
+                        {edu.level}
+                      </span>
+                    </div>
+                    <h4 className="font-semibold text-foreground transition-colors group-hover:text-primary">
+                      {edu.course}
+                    </h4>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {edu.institution}
+                    </p>
+                    <div className="mt-3">
+                      <span
+                        className={`inline-flex rounded-full px-3 py-1 font-mono text-xs transition-all ${
+                          edu.highlight
+                            ? "bg-primary/20 text-primary border border-primary/20"
+                            : "bg-secondary text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary"
+                        }`}
+                      >
+                        {edu.status}
+                      </span>
+                    </div>
                   </div>
-                  <h4 className="font-semibold text-foreground">{edu.course}</h4>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {edu.institution}
-                  </p>
-                  <div className="mt-3">
-                    <span
-                      className={`inline-flex rounded-full px-3 py-1 font-mono text-xs ${
-                        edu.highlight
-                          ? "bg-primary/10 text-primary"
-                          : "bg-secondary text-muted-foreground"
-                      }`}
-                    >
-                      {edu.status}
-                    </span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
-          {/* Certifications */}
+          {/* Lado Direito: Certificações com Brilho Individual */}
           <div>
             <h3 className="mb-6 flex items-center gap-2 font-mono text-sm font-semibold text-primary tracking-wider uppercase">
               <Award size={16} />
@@ -146,7 +122,7 @@ export function Education() {
               {certifications.map((cert) => (
                 <div
                   key={cert.name}
-                  className="group flex items-center justify-between rounded-lg border border-border bg-card/30 px-5 py-4 transition-all hover:border-primary/20 hover:bg-card/50"
+                  className="group flex items-center justify-between rounded-lg border border-border bg-card/30 px-5 py-4 transition-all duration-300 hover:border-primary/50 hover:bg-card/50 glow-border"
                 >
                   <div className="flex-1">
                     <h4 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
@@ -157,10 +133,10 @@ export function Education() {
                     </p>
                   </div>
                   <div className="flex items-center gap-3 ml-4 shrink-0">
-                    <span className="font-mono text-xs text-muted-foreground">
+                    <span className="font-mono text-[10px] text-muted-foreground group-hover:text-primary/70">
                       {cert.hours}
                     </span>
-                    <span className="rounded bg-secondary px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                    <span className="rounded bg-secondary px-2 py-0.5 font-mono text-[10px] text-muted-foreground group-hover:bg-primary/20 group-hover:text-primary transition-all">
                       {cert.year}
                     </span>
                   </div>
@@ -171,5 +147,5 @@ export function Education() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -49,7 +49,7 @@ export function About() {
           {/* Left - text */}
           <div className="flex flex-col gap-6">
             <p className="leading-relaxed text-muted-foreground">
-              Sou Kauan Rey Bento da Silva, estudante e estagiario em Tecnologia
+              Sou Kauan Rey Bento da Silva, estudante e jovem aprendiz em Tecnologia
               da Informacao com uma paixao genuina por criar solucoes que fazem a
               diferenca. Atualmente cursando Redes de Sistemas na{" "}
               <span className="text-foreground font-medium">
