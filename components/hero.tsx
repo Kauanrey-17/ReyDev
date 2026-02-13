@@ -88,9 +88,9 @@ export function Hero() {
         </div>
 
         {/* Bio */}
-        <p className="mx-auto mb-10 max-w-2xl text-balance text-muted-foreground leading-relaxed">
-          Estudante de Redes de Sistemas na FATEC e tecnico em Desenvolvimento
-          de Sistemas. Apaixonado por criar solucoes inovadoras com Python,
+        <p className="mx-auto mb-8 max-w-2xl text-balance text-muted-foreground leading-relaxed px-4">
+          Estudante de Redes de Sistemas na FATEC e técnico em Desenvolvimento
+          de Sistemas. Apaixonado por criar soluções inovadoras com Python,
           React, Java e muito mais.
         </p>
 
@@ -98,7 +98,7 @@ export function Hero() {
         <div className="flex flex-wrap items-center justify-center gap-4">
           <a
             href="#contato"
-            className="group relative inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-mono text-sm font-semibold text-primary-foreground transition-all hover:scale-105 glow-border"
+            className="group relative inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-mono text-sm font-semibold text-primary-foreground transition-all hover:scale-105 shadow-[0_0_15px_rgba(var(--primary),0.3)]"
           >
             Entrar em contato
           </a>
@@ -110,18 +110,18 @@ export function Hero() {
           </a>
         </div>
 
-        {/* Stats */}
-        <div className="mt-16 grid grid-cols-3 gap-8">
+        {/* Stats - AJUSTADO: mb-20 para dar espaço ao scroll no mobile */}
+        <div className="mt-12 mb-20 grid grid-cols-3 gap-4 md:mt-16 md:mb-0 md:gap-8">
           {[
             { value: "10+", label: "Tecnologias" },
             { value: "5+", label: "Projetos" },
-            { value: "3+", label: "Certificacoes" },
+            { value: "3+", label: "Certificações" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-2xl font-bold text-primary glow-text md:text-3xl">
+              <div className="text-xl font-bold text-primary glow-text md:text-3xl">
                 {stat.value}
               </div>
-              <div className="mt-1 text-xs text-muted-foreground font-mono uppercase tracking-wider">
+              <div className="mt-1 text-[10px] text-muted-foreground font-mono uppercase tracking-wider md:text-xs">
                 {stat.label}
               </div>
             </div>
@@ -129,13 +129,13 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - AJUSTADO: Escondido em telas muito pequenas ou reposicionado */}
       <a
         href="#sobre"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-primary sm:bottom-8"
         aria-label="Rolar para baixo"
       >
-        <span className="font-mono text-xs">scroll</span>
+        <span className="font-mono text-xs text-primary/60">scroll</span>
         <ChevronDown size={16} className="animate-bounce" />
       </a>
     </section>

@@ -1,4 +1,4 @@
-import { Code2, Network, Cpu, Lightbulb } from "lucide-react"
+import { Code2, Network, Cpu, Lightbulb } from "lucide-react";
 
 const highlights = [
   {
@@ -25,7 +25,7 @@ const highlights = [
     description:
       "Participacao em ideathon com prototipo de solucao em IA voltada a educacao inclusiva.",
   },
-]
+];
 
 export function About() {
   return (
@@ -40,8 +40,8 @@ export function About() {
             </span>
           </div>
           <h2 className="text-3xl font-bold md:text-4xl">
-            Construindo o{" "}
-            <span className="text-primary glow-text">futuro</span> com codigo
+            Construindo o <span className="text-primary glow-text">futuro</span>{" "}
+            com codigo
           </h2>
         </div>
 
@@ -49,9 +49,9 @@ export function About() {
           {/* Left - text */}
           <div className="flex flex-col gap-6">
             <p className="leading-relaxed text-muted-foreground">
-              Sou Kauan Rey Bento da Silva, estudante e jovem aprendiz em Tecnologia
-              da Informacao com uma paixao genuina por criar solucoes que fazem a
-              diferenca. Atualmente cursando Redes de Sistemas na{" "}
+              Sou Kauan Rey Bento da Silva, estudante e jovem aprendiz em
+              Tecnologia da Informacao com uma paixao genuina por criar solucoes
+              que fazem a diferenca. Atualmente cursando Redes de Sistemas na{" "}
               <span className="text-foreground font-medium">
                 FATEC Prefeito Hirant Sanazar
               </span>
@@ -64,9 +64,9 @@ export function About() {
             <p className="leading-relaxed text-muted-foreground">
               Minha trajetoria inclui desde o desenvolvimento de ferramentas de
               automacao com Python ate a participacao em ideathons de inovacao
-              tecnologica. Sou movido pela curiosidade e pelo desejo constante de
-              aprender, sempre buscando unir teoria e pratica para gerar impacto
-              real.
+              tecnologica. Sou movido pela curiosidade e pelo desejo constante
+              de aprender, sempre buscando unir teoria e pratica para gerar
+              impacto real.
             </p>
             <p className="leading-relaxed text-muted-foreground">
               Tenho experiencia em trabalho remoto, colaboracao em equipes
@@ -85,24 +85,37 @@ export function About() {
                 </span>
               </div>
               <div className="flex flex-col gap-1 text-muted-foreground">
-                <div>
-                  <span className="text-primary">kauan@rey</span>
-                  <span className="text-muted-foreground">:</span>
-                  <span className="text-chart-2">~</span>
-                  <span className="text-muted-foreground">$ </span>
-                  <span className="text-foreground">cat sobre.txt</span>
+                <div className="flex flex-col gap-1 font-mono text-sm">
+                  <div className="group transition-all">
+                    {/* E-mail e comandos com estilo de terminal */}
+                    <span className="text-primary font-bold glow-text">
+                      kauanrey366@gmail.com
+                    </span>
+                    <span className="text-muted-foreground">:</span>
+                    <span className="text-chart-2">~</span>
+                    <span className="text-muted-foreground">$ </span>
+                    <span className="text-foreground group-hover:text-primary transition-colors">
+                      cat sobre.txt
+                    </span>
+                  </div>
+
+                  {/* Opcional: Adicionar a resposta do comando 'cat' logo abaixo */}
+                  <div className="mt-2 text-muted-foreground leading-relaxed">
+                    {/* Seu texto de descrição aqui */}
+                  </div>
                 </div>
                 <div className="text-muted-foreground pl-0 mt-1">
-                  {">"} 20 anos | Sao Paulo, SP
+                  {">"} 19 anos | Sao Paulo, SP
                 </div>
                 <div className="text-muted-foreground pl-0">
-                  {">"} FATEC - Redes de Sistemas (3o semestre)
+                  {">"} FATEC - Redes de Sistemas (3° semestre)
                 </div>
                 <div className="text-muted-foreground pl-0">
                   {">"} ETEC - Dev. de Sistemas (concluido)
                 </div>
                 <div className="text-muted-foreground pl-0">
-                  {">"} Status: Buscando oportunidades de estagio
+                  {">"} Status: Trabalhando de jovem aprendiz na area de TI e
+                  projetos freelance.
                 </div>
               </div>
             </div>
@@ -130,5 +143,5 @@ export function About() {
         </div>
       </div>
     </section>
-  )
+  );
 }

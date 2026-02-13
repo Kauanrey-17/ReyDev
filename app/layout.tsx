@@ -7,7 +7,7 @@ const _inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const _jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' })
 
 export const metadata: Metadata = {
-  title: 'ReyDev | Kauan Rey - Desenvolvedor & Tecnologia',
+  title: 'ReyDeV | Kauan Rey - Desenvolvedor & Tecnologia',
   description: 'Portfolio de Kauan Rey Bento da Silva - Desenvolvedor Full-Stack, estudante de Redes de Sistemas e apaixonado por tecnologia e inovacao.',
   keywords: ['Kauan Rey', 'Desenvolvedor', 'Portfolio', 'React', 'Python', 'Java', 'Full-Stack'],
 }
