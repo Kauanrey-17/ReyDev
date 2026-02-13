@@ -2,67 +2,76 @@
 
 const skillCategories = [
   {
-    title: "Linguagens",
+    title: "Linguagens & Core",
     skills: [
+      { name: "TypeScript", level: 90 }, // Adicionado destaque
+      { name: "JavaScript", level: 85 },
       { name: "Python", level: 85 },
-      { name: "JavaScript", level: 80 },
       { name: "HTML5 / CSS3", level: 90 },
-      { name: "Java", level: 70 },
       { name: "SQL", level: 75 },
     ],
   },
   {
-    title: "Frameworks & Libs",
+    title: "Frameworks & APIs",
     skills: [
-      { name: "React", level: 75 },
-      { name: "Flutter", level: 60 },
-      { name: "ASP.NET", level: 55 },
-      { name: "Node.js", level: 65 },
+      { name: "Next.js", level: 85 },
+      { name: "React", level: 80 },
+      { name: "Resend API", level: 90 }, // Nova habilidade
+      { name: "Node.js", level: 70 },
+      { name: "TailwindCSS", level: 95 },
+    ],
+  },
+  {
+    title: "Integrações & IA",
+    skills: [
+      { name: "Engenharia de Prompt (IA)", level: 85 }, // Nova habilidade
+      { name: "Conexão com Calendário", level: 80 }, // Nova habilidade
+      { name: "Vercel SDK", level: 75 },
+      { name: "Git", level: 75 },
     ],
   },
   {
     title: "Banco de Dados",
     skills: [
-      { name: "SQL Server", level: 70 },
       { name: "MySQL", level: 75 },
+      { name: "Supabase / PostgreSQL", level: 70 },
+      { name: "SQL Server", level: 70 },
     ],
   },
   {
-    title: "Infraestrutura",
+    title: "Infraestrutura & Redes",
     skills: [
-      { name: "Linux", level: 60 },
-      { name: "Redes", level: 70 },
-      { name: "Cisco Packet Tracer", level: 65 },
+      { name: "Linux", level: 65 },
       { name: "Hardware", level: 70 },
+      { name: "Cisco Packet Tracer", level: 65 },
     ],
   },
   {
-    title: "Ferramentas",
+    title: "Design & Office",
     skills: [
-      { name: "Pacote Office", level: 85 },
-      { name: "Canva", level: 80 },
+      { name: "Canva", level: 85 },
+      { name: "Pacote Office", level: 90 },
       { name: "Microsoft Visio", level: 65 },
-      { name: "Git", level: 60 },
     ],
   },
 ]
 
 const techTags = [
-  "Python",
+  "TypeScript",
+  "Next.js",
+  "Resend",
+  "IA (Prompt Engineering)",
+  "Integração de Calendário",
   "React",
+  "TailwindCSS",
   "JavaScript",
-  "HTML5",
-  "CSS3",
-  "Java",
-  "Flutter",
-  "ASP.NET",
-  "SQL Server",
+  "Python",
   "MySQL",
-  "Linux",
-  "Cisco Packet Tracer",
-  "Microsoft Visio",
-  "Git",
   "Node.js",
+  "Git",
+  "Vercel",
+  "Supabase",
+  "Linux"
 ]
 
 export function Skills() {
@@ -90,7 +99,7 @@ export function Skills() {
           </div>
           <h2 className="text-3xl font-bold md:text-4xl">
             Stack{" "}
-            <span className="text-primary glow-text">tecnologico</span>
+            <span className="text-primary glow-text">tecnológico</span>
           </h2>
         </div>
 
