@@ -1,149 +1,136 @@
-"use client";
+"use client"
 
-import {
-  Radio,
-  Heart,
-  Lightbulb,
-  Code2,
-  ShoppingBag,
-  Factory,
-} from "lucide-react";
+import { useState } from "react"
+import { motion } from "framer-motion"
+import { Briefcase, Calendar, TrendingUp, Filter } from "lucide-react"
 
 const experiences = [
   {
-    icon: Factory,
-    title: "Jovem Aprendiz",
-    company: "Sabó (via CAMP Oeste)",
-    type: "Presencial",
+    role: "Jovem aprendiz de Técnico em TI",
+    company: "Sabó Industria de Autopeças",
+    period: "2026 - Atual",
+    category: "Suporte",
+    impact: "+42% eficiência",
     description:
-      "Atuando na Sabó, líder no setor de autopeças, em atividades que abrangem suporte administrativo e participação em projetos de melhoria de processos. Experiência focada em aprendizado prático e rotinas industriais multinacionais.",
-    tags: ["Administração", "Processos", "Indústria", "CAMP Oeste"],
+      "Responsável por suporte técnico, manutenção de hardware, redes e atendimento a usuários. Redução significativa no tempo de resolução de chamados."
   },
   {
-    icon: Code2,
-    title: "Membro do Board Estudantil - Desenvolvimento",
-    company: "Desafio Soul",
-    type: "Home Office",
+    role: "Infraestrutura & Redes",
+    company: "Projeto Próprio",
+    period: "2024 - 2025",
+    category: "Redes",
+    impact: "99.9% uptime",
     description:
-      "Atuacao como membro do board estudantil, colaborando em iniciativas de inovacao educacional. Desenvolvimento de ferramenta de automacao de assinaturas de e-mail com Python, HTML e CSS. Manipulacao de dados via CSV e Excel.",
-    tags: ["Python", "HTML", "CSS", "Automacao"],
+      "Implementação e gerenciamento de domestica redes, cabeamento estruturado e monitoramento de infraestrutura."
   },
   {
-    icon: Lightbulb,
-    title: "Participacao em Ideathon - Inovacao & Tecnologia",
-    company: "Osasco, SP",
-    type: "Presencial",
+    role: "Desenvolvedor Frontend",
+    company: "Freelancer",
+    period: "2026 - Atual",
+    category: "Dev",
+    impact: "+60% performance",
     description:
-      "Analise de problemas reais em educacao e desenvolvimento de prototipo conceitual de solucao baseada em Inteligencia Artificial, voltada ao apoio educacional de alunos com diferentes necessidades de aprendizagem.",
-    tags: ["IA", "Inovacao", "Prototipacao", "Pitch"],
-  },
-  {
-    icon: Radio,
-    title: "Criacao e Operacao de Radio Escolar",
-    company: "Projeto Escolar",
-    type: "Presencial",
-    description:
-      "Colaboracao na criacao e implantacao da radio escolar, operacao de equipamentos de audio (mesa de som, microfones) e divulgacao de comunicados institucionais.",
-    tags: ["Comunicacao", "Audio", "Trabalho em Equipe"],
-  },
-  {
-    icon: ShoppingBag,
-    title: "Vendedor",
-    company: "Gabriella Sports - Lapa",
-    type: "Temporario",
-    description:
-      "Atendimento direto ao cliente, apresentacao de produtos esportivos, organizacao de estoque e apoio no processo de compra. Atuacao em tecnicas de comunicacao e negociacao.",
-    tags: ["Vendas", "Atendimento", "Negociacao"],
-  },
-  {
-    icon: Heart,
-    title: "Trabalho Voluntario - Acao Social",
-    company: "Igreja",
-    type: "Voluntario",
-    description:
-      "Participacao em acao social de arrecadacao e distribuicao de brinquedos para criancas de comunidades locais. Apoio logistico e organizacao da acao.",
-    tags: ["Voluntariado", "Logistica", "Impacto Social"],
-  },
-];
+      "Criação de interfaces modernas, responsivas e performáticas utilizando React, Next.js e UX avançado."
+  }
+]
+
+const filters = ["Todos", "Suporte", "Redes", "Dev"]
 
 export function Experience() {
+  const [activeFilter, setActiveFilter] = useState("Todos")
+
+  const filtered =
+    activeFilter === "Todos"
+      ? experiences
+      : experiences.filter((exp) => exp.category === activeFilter)
+
   return (
-    <section id="experiencia" className="relative py-24 px-6">
-      <div className="mx-auto max-w-6xl">
-        {/* Header da Seção */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px flex-1 max-w-[60px] bg-primary/50" />
-            <span className="font-mono text-sm text-primary tracking-wider uppercase">
-              Experiencia
-            </span>
-          </div>
-          <h2 className="text-3xl font-bold md:text-4xl">
-            Trajetoria <span className="text-primary glow-text">profissional</span>
-          </h2>
-        </div>
+    <section
+      id="experience"
+      className="relative py-24 px-6 max-w-6xl mx-auto"
+    >
+      {/* TITLE */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="mb-14 text-center"
+      >
+        <h2 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          Experiência Profissional
+        </h2>
+        <p className="text-zinc-400 mt-3">
+          Evolução contínua, impacto real e mentalidade Big Tech
+        </p>
+      </motion.div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Linha vertical central */}
-          <div className="absolute left-6 top-0 bottom-0 w-px bg-border md:left-1/2 md:-translate-x-px" />
+      {/* FILTERS */}
+      <div className="flex justify-center gap-3 mb-12 flex-wrap">
+        {filters.map((filter) => (
+          <button
+            key={filter}
+            onClick={() => setActiveFilter(filter)}
+            className={`px-4 py-2 rounded-full text-sm border transition ${
+              activeFilter === filter
+                ? "bg-cyan-500/20 border-cyan-400 text-cyan-300"
+                : "border-zinc-700 text-zinc-400 hover:border-cyan-500 hover:text-white"
+            }`}
+          >
+            {filter}
+          </button>
+        ))}
+      </div>
 
-          <div className="flex flex-col gap-12">
-            {experiences.map((exp, index) => (
-              <div
-                key={exp.title}
-                className={`relative flex flex-col md:flex-row ${
-                  index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                } gap-8 md:gap-0`}
-              >
-                {/* Ponto na timeline com brilho */}
-                <div className="absolute left-6 top-6 z-10 flex h-3 w-3 -translate-x-1/2 items-center justify-center md:left-1/2">
-                  <div className="h-3 w-3 rounded-full bg-primary shadow-[0_0_10px_rgba(var(--primary),0.5)]" />
-                </div>
+      {/* TIMELINE */}
+      <div className="relative border-l border-cyan-500/20 pl-8 space-y-12">
+        {filtered.map((exp, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.15 }}
+            className="group relative"
+          >
+            {/* DOT */}
+            <div className="absolute -left-[34px] top-2 w-4 h-4 bg-cyan-400 rounded-full shadow-[0_0_12px_cyan]" />
 
-                {/* Card de Conteúdo */}
-                <div className={`ml-12 md:ml-0 md:w-1/2 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}>
-                  <div className="group relative rounded-xl border border-border bg-card/30 p-6 transition-all duration-300 hover:border-primary/50 hover:bg-card/50 glow-border">
-                    <div className="mb-4 flex items-center gap-3">
-                      <div className="inline-flex rounded-lg bg-primary/10 p-2 transition-colors group-hover:bg-primary/20">
-                        <exp.icon size={18} className="text-primary" />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-mono text-primary/80">{exp.company}</span>
-                        </div>
-                        <span className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest">{exp.type}</span>
-                      </div>
-                    </div>
+            {/* CARD */}
+            <div className="relative p-6 rounded-2xl border border-zinc-800 bg-zinc-900/60 backdrop-blur-xl transition transform hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(0,255,255,0.15)]">
 
-                    <h3 className="mb-3 text-lg font-bold transition-colors group-hover:text-primary">
-                      {exp.title}
-                    </h3>
-                    
-                    <p className="mb-6 text-sm text-muted-foreground leading-relaxed">
-                      {exp.description}
-                    </p>
+              {/* HEADER */}
+              <div className="flex justify-between flex-wrap gap-2 mb-2">
+                <h3 className="text-xl font-semibold text-white">
+                  {exp.role}
+                </h3>
 
-                    <div className="flex flex-wrap gap-2">
-                      {exp.tags.map((tag) => (
-                        <span 
-                          key={tag} 
-                          className="rounded-full border border-primary/10 bg-primary/5 px-3 py-1 font-mono text-[10px] text-primary transition-all group-hover:border-primary/30"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Espaçador para o lado oposto */}
-                <div className="hidden md:block md:w-1/2" />
+                <span className="text-xs px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                  {exp.impact}
+                </span>
               </div>
-            ))}
-          </div>
-        </div>
+
+              {/* COMPANY */}
+              <div className="flex items-center gap-2 text-zinc-400 text-sm mb-3">
+                <Briefcase size={14} />
+                {exp.company}
+              </div>
+
+              {/* PERIOD */}
+              <div className="flex items-center gap-2 text-zinc-500 text-xs mb-4">
+                <Calendar size={13} />
+                {exp.period}
+              </div>
+
+              {/* DESCRIPTION */}
+              <p className="text-zinc-300 text-sm leading-relaxed">
+                {exp.description}
+              </p>
+
+              {/* GLOW HOVER */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-r from-cyan-500/5 to-blue-500/5" />
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
-  );
+  )
 }

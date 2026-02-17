@@ -1,16 +1,17 @@
 "use client";
 
+import Image from "next/image";
 import { ExternalLink, Layout } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const projects = [
   {
     title: "Rane Lazer",
     description:
-      "Site institucional desenvolvido para a Rane Lazer, com foco em apresentação de serviços de eventos e lazer. Interface moderna, responsiva e otimizada para conversão.",
-    tech: ["Next.js", "Tailwind CSS", "v0.dev"],
+      "Site institucional profissional focado em conversão, apresentação de serviços e experiência do usuário. Interface moderna, rápida e responsiva.",
+    tech: ["Next.js", "Tailwind", "Vercel"],
     link: "https://v0-rane-lazer.vercel.app/",
-    image: "/project-rane.png",
+    image: "/project-rane.PNG",
   },
 ];
 
@@ -18,69 +19,84 @@ export function Projects() {
   return (
     <section id="projetos" className="relative py-24 px-6">
       <div className="mx-auto max-w-6xl">
-        {/* Header da Seção */}
+
+        {/* HEADER */}
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px flex-1 max-w-[60px] bg-primary/50" />
             <span className="font-mono text-sm text-primary tracking-wider uppercase">
-              Portfolio
+              Portfólio
             </span>
           </div>
+
           <h2 className="text-3xl font-bold md:text-4xl">
             Projetos <span className="text-primary glow-text">em destaque</span>
           </h2>
         </div>
 
-        {/* Grid de Projetos */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project) => (
-            <div
+        {/* GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {projects.map((project, index) => (
+            <motion.div
               key={project.title}
-              // A classe 'group' permite animar os filhos quando o mouse entra no card
-              // 'glow-border' adiciona o efeito de luz que você tem nos outros cards
-              className="group relative rounded-xl border border-border bg-card/30 overflow-hidden transition-all duration-300 hover:border-primary/50 hover:bg-card/50 glow-border"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              viewport={{ once: true }}
+              className="group relative rounded-2xl border border-border bg-card/30 backdrop-blur overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(var(--primary),0.15)]"
             >
-              <div className="p-8">
-                {/* O ícone muda de cor no hover do card */}
-                <div className="mb-4 inline-flex rounded-lg bg-primary/10 p-3 transition-colors group-hover:bg-primary/20">
-                  <Layout size={24} className="text-primary" />
+
+              {/* IMAGE PREVIEW */}
+              <div className="relative h-52 w-full overflow-hidden">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+
+                {/* overlay glow */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-80" />
+              </div>
+
+              {/* CONTENT */}
+              <div className="p-7">
+
+                <div className="mb-4 inline-flex rounded-lg bg-primary/10 p-3">
+                  <Layout size={20} className="text-primary" />
                 </div>
 
-                {/* O título muda de cor no hover */}
-                <h3 className="text-xl font-bold mb-3 transition-colors group-hover:text-primary">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
-                
+
                 <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                   {project.description}
                 </p>
 
-                {/* Tags de tecnologia que também reagem ao hover */}
-                <div className="flex flex-wrap gap-2 mb-8">
+                {/* TECH */}
+                <div className="flex flex-wrap gap-2 mb-7">
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="font-mono text-[10px] px-2 py-1 rounded border border-primary/20 bg-primary/5 text-primary transition-all group-hover:border-primary/50"
+                      className="text-[10px] font-mono px-2 py-1 rounded border border-primary/20 bg-primary/5 text-primary"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex items-center gap-4">
-                  {/* Mantive o as any para evitar o erro de tipagem que você teve no terminal */}
-                  <Button {...({ asChild: true, size: "sm" } as any)} className="gap-2 transition-transform group-hover:scale-105">
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Acessar Site <ExternalLink size={14} />
-                    </a>
-                  </Button>
-                </div>
+                {/* BUTTON */}
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-mono text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_15px_rgba(var(--primary),0.4)]"
+                >
+                  Ver Projeto <ExternalLink size={14} />
+                </a>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

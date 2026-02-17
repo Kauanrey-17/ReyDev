@@ -1,4 +1,15 @@
-import { Mail, Phone, MapPin, ExternalLink } from "lucide-react"
+"use client";
+
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Github,
+  Linkedin,
+  Send,
+  Loader2,
+} from "lucide-react";
+import { useState, FormEvent } from "react";
 
 const contactInfo = [
   {
@@ -14,140 +25,197 @@ const contactInfo = [
     href: "tel:+5511960396532",
   },
   {
-    icon: Phone,
-    label: "Telefone 2",
-    value: "(11) 95145-8593",
-    href: "tel:+5511951458593",
-  },
-  {
     icon: MapPin,
-    label: "Localizacao",
-    value: "Jardim Jaragua - Sao Paulo, SP",
+    label: "Localização",
+    value: "São Paulo, SP — Brasil",
     href: null,
   },
-]
-
-const softSkills = [
-  "Comunicacao clara e objetiva",
-  "Aprendizado rapido",
-  "Organizacao e responsabilidade",
-  "Trabalho em equipe",
-  "Proatividade",
-  "Atencao a detalhes",
-  "Resolucao de problemas",
-  "Colaboracao remota",
-]
+  {
+    icon: Github,
+    label: "GitHub",
+    value: "github.com/Kauanrey-17",
+    href: "https://github.com/Kauanrey-17",
+  },
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    value: "linkedin.com/in/kauanrey",
+    href: "https://www.linkedin.com/in/kauanrey",
+  },
+];
 
 export function Contact() {
-  return (
-    <section id="contato" className="relative py-24 px-6">
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div
-          className="h-full w-full"
-          style={{
-            backgroundImage: `radial-gradient(hsl(185 80% 50%) 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </div>
+  const [loading, setLoading] = useState(false);
 
-      <div className="relative mx-auto max-w-6xl">
-        {/* Section header */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px flex-1 max-w-[60px] bg-primary/50" />
-            <span className="font-mono text-sm text-primary tracking-wider uppercase">
-              Contato
-            </span>
-          </div>
-          <h2 className="text-3xl font-bold md:text-4xl">
-            Vamos{" "}
-            <span className="text-primary glow-text">conectar</span>
+  async function sendEmail(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+
+    const form = e.currentTarget;
+
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      whatsapp: (form.elements.namedItem("whatsapp") as HTMLInputElement).value,
+      project: (form.elements.namedItem("project") as HTMLSelectElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      const text = `🚀 Novo Orçamento
+
+Nome: ${data.name}
+Email: ${data.email}
+WhatsApp: ${data.whatsapp}
+Projeto: ${data.project}
+
+Mensagem:
+${data.message}`;
+
+      const whatsappURL = `https://wa.me/5511960396532?text=${encodeURIComponent(
+        text
+      )}`;
+
+      if (result.success) {
+        window.open(whatsappURL, "_blank");
+        form.reset();
+        alert("Orçamento enviado 🚀");
+      } else {
+        alert("Erro ao enviar ❌");
+      }
+    } catch {
+      alert("Erro de conexão ❌");
+    }
+
+    setLoading(false);
+  }
+
+  return (
+    <section id="contato" className="relative py-28 px-6">
+      <div className="mx-auto max-w-6xl">
+
+        {/* HEADER */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold">
+            Solicitar <span className="text-cyan-400">Orçamento</span>
           </h2>
+          <p className="text-muted-foreground mt-3">
+            Me conte seu projeto e receba a melhor solução 🚀
+          </p>
         </div>
 
-        <div className="grid gap-12 lg:grid-cols-2">
-          {/* Contact info */}
-          <div>
-            <p className="mb-8 text-muted-foreground leading-relaxed">
-              Estou buscando oportunidades de estagio para desenvolver minhas
-              habilidades e contribuir para o crescimento da empresa. Se voce tem
-              um projeto ou vaga que combina comigo, entre em contato!
-            </p>
+        <div className="grid lg:grid-cols-2 gap-12">
 
-            <div className="flex flex-col gap-4">
-              {contactInfo.map((item) => (
-                <div
-                  key={item.label}
-                  className="flex items-center gap-4 rounded-lg border border-border bg-card/30 p-4 transition-all hover:border-primary/20"
-                >
-                  <div className="inline-flex rounded-lg bg-primary/10 p-3">
-                    <item.icon size={18} className="text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <span className="block text-xs text-muted-foreground font-mono uppercase tracking-wider">
-                      {item.label}
-                    </span>
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        className="text-sm text-foreground hover:text-primary transition-colors inline-flex items-center gap-1"
-                      >
-                        {item.value}
-                        <ExternalLink size={12} className="text-muted-foreground" />
-                      </a>
-                    ) : (
-                      <span className="text-sm text-foreground">{item.value}</span>
-                    )}
-                  </div>
+          {/* INFO */}
+          <div className="space-y-4">
+            {contactInfo.map((item) => (
+              <div
+                key={item.label}
+                className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl p-4 hover:border-cyan-400/40 transition"
+              >
+                <item.icon className="text-cyan-400" size={18} />
+
+                <div>
+                  <p className="text-xs text-muted-foreground">{item.label}</p>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      className="text-sm hover:text-cyan-400"
+                    >
+                      {item.value}
+                    </a>
+                  ) : (
+                    <p className="text-sm">{item.value}</p>
+                  )}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
 
-          {/* Soft skills */}
-          <div>
-            <h3 className="mb-6 font-mono text-sm font-semibold text-primary tracking-wider uppercase">
-              Soft Skills
-            </h3>
+          {/* FORM */}
+          <form
+            onSubmit={sendEmail}
+            className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-2xl p-8 shadow-[0_0_40px_rgba(0,0,0,0.3)]"
+          >
+            <div className="flex flex-col gap-5">
 
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {softSkills.map((skill) => (
-                <div
-                  key={skill}
-                  className="flex items-center gap-3 rounded-lg border border-border bg-card/30 px-4 py-3 transition-all hover:border-primary/20"
+              <PremiumInput name="name" label="Seu nome" />
+              <PremiumInput name="email" type="email" label="Seu email" />
+              <PremiumInput name="whatsapp" label="Seu WhatsApp" />
+
+              {/* SELECT VISÍVEL */}
+              <div className="relative">
+                <select
+                  name="project"
+                  required
+                  className="peer w-full rounded-xl border border-white/10 bg-[#0B0F19]/80 px-4 pt-5 pb-2 text-white backdrop-blur-xl outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20"
                 >
-                  <div className="h-1.5 w-1.5 rounded-full bg-primary glow-dot shrink-0" />
-                  <span className="text-sm text-muted-foreground">{skill}</span>
-                </div>
-              ))}
-            </div>
+                  <option value="Site Profissional">Site Profissional</option>
+                  <option value="Sistema Web">Sistema Web</option>
+                  <option value="Automação">Automação</option>
+                  <option value="Landing Page">Landing Page</option>
+                  <option value="Outro">Outro</option>
+                </select>
+                <label className="absolute left-3 top-1 text-xs text-cyan-400">
+                  Tipo de projeto
+                </label>
+              </div>
 
-            {/* Differentials */}
-            <div className="mt-8 rounded-lg border border-primary/20 bg-primary/5 p-6">
-              <h4 className="mb-4 font-mono text-sm font-semibold text-primary tracking-wider uppercase">
-                Diferenciais
-              </h4>
-              <ul className="flex flex-col gap-2">
-                {[
-                  "Experiencia pratica em projetos academicos e institucionais",
-                  "Desenvolvimento de ferramenta de automacao com Python",
-                  "Prototipo de solucao em Inteligencia Artificial",
-                  "Vivencia em ambientes colaborativos e multidisciplinares",
-                ].map((diff) => (
-                  <li
-                    key={diff}
-                    className="flex items-start gap-2 text-sm text-muted-foreground"
-                  >
-                    <span className="mt-1.5 h-1 w-1 rounded-full bg-primary shrink-0" />
-                    {diff}
-                  </li>
-                ))}
-              </ul>
+              <textarea
+                name="message"
+                rows={4}
+                placeholder="Descreva seu projeto..."
+                className="w-full rounded-xl border border-white/10 bg-[#0B0F19]/80 px-4 py-3 text-white backdrop-blur-xl outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 resize-none"
+                required
+              />
+
+              <button
+                disabled={loading}
+                className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 py-3 font-semibold text-black transition hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(34,211,238,0.4)]"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="animate-spin" size={18} />
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    <Send size={18} />
+                    Solicitar Orçamento
+                  </>
+                )}
+              </button>
+
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </section>
-  )
+  );
+}
+
+/* INPUT PREMIUM BIG TECH */
+function PremiumInput({ label, ...props }: any) {
+  return (
+    <div className="relative">
+      <input
+        {...props}
+        required
+        className="peer w-full rounded-xl border border-white/10 bg-[#0B0F19]/80 px-4 pt-5 pb-2 text-white backdrop-blur-xl outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20"
+        placeholder=" "
+      />
+      <label className="absolute left-3 top-1 text-xs text-cyan-400 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-cyan-400">
+        {label}
+      </label>
+    </div>
+  );
 }

@@ -1,139 +1,149 @@
-import { Code2, Network, Cpu, Lightbulb } from "lucide-react";
+"use client"
+
+import { useEffect, useRef, useState } from "react"
+import { Code2, Network, Cpu, Lightbulb } from "lucide-react"
 
 const highlights = [
   {
     icon: Code2,
     title: "Desenvolvimento",
     description:
-      "Experiencia com React, Python, Java, ASP.NET, Flutter e criacao de interfaces web modernas.",
+      "Criação de sistemas e sites modernos com foco em performance, conversão e experiência premium para o usuário.",
   },
   {
     icon: Network,
-    title: "Redes & Infra",
+    title: "Infra & Performance",
     description:
-      "Cursando Redes de Sistemas na FATEC com conhecimentos em Cisco Packet Tracer, Linux e configuracao de redes.",
+      "Conhecimento em redes, deploy e otimização para garantir estabilidade, velocidade e segurança nas aplicações.",
   },
   {
     icon: Cpu,
-    title: "Hardware",
+    title: "Soluções Técnicas",
     description:
-      "Manutencao de computadores, crimpagem de cabos de rede e suporte tecnico.",
+      "Automação, integrações e soluções sob medida para reduzir trabalho manual e aumentar produtividade.",
   },
   {
     icon: Lightbulb,
-    title: "Inovacao",
+    title: "Mentalidade de Resultado",
     description:
-      "Participacao em ideathon com prototipo de solucao em IA voltada a educacao inclusiva.",
+      "Cada projeto é pensado para gerar impacto real, atrair clientes e entregar valor de verdade.",
   },
-];
+]
 
 export function About() {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true)
+      },
+      { threshold: 0.25 }
+    )
+
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section id="sobre" className="relative py-24 px-6">
-      <div className="mx-auto max-w-6xl">
-        {/* Section header */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px flex-1 max-w-[60px] bg-primary/50" />
-            <span className="font-mono text-sm text-primary tracking-wider uppercase">
-              Sobre mim
+    <section id="sobre" ref={ref} className="relative py-28 px-6 overflow-hidden">
+      
+      {/* Glow background */}
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-[500px] bg-cyan-500/10 blur-[120px] rounded-full" />
+
+      <div className="relative mx-auto max-w-6xl">
+        
+        {/* Header */}
+        <div
+          className={`mb-20 transition-all duration-1000 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <p className="font-mono text-sm text-cyan-400 tracking-widest uppercase">
+            Sobre mim
+          </p>
+
+          <h2 className="mt-3 text-4xl md:text-5xl font-bold leading-tight">
+            Construindo soluções que geram{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 glow-text">
+              resultado real
             </span>
-          </div>
-          <h2 className="text-3xl font-bold md:text-4xl">
-            Construindo o <span className="text-primary glow-text">futuro</span>{" "}
-            com codigo
           </h2>
         </div>
 
-        <div className="grid gap-12 lg:grid-cols-2">
-          {/* Left - text */}
-          <div className="flex flex-col gap-6">
-            <p className="leading-relaxed text-muted-foreground">
-              Sou Kauan Rey Bento da Silva, estudante e jovem aprendiz em
-              Tecnologia da Informacao com uma paixao genuina por criar solucoes
-              que fazem a diferenca. Atualmente cursando Redes de Sistemas na{" "}
-              <span className="text-foreground font-medium">
-                FATEC Prefeito Hirant Sanazar
-              </span>
-              , e com formacao tecnica em Desenvolvimento de Sistemas pela{" "}
-              <span className="text-foreground font-medium">
-                ETEC Prof Basilides de Godoy
-              </span>
-              .
-            </p>
-            <p className="leading-relaxed text-muted-foreground">
-              Minha trajetoria inclui desde o desenvolvimento de ferramentas de
-              automacao com Python ate a participacao em ideathons de inovacao
-              tecnologica. Sou movido pela curiosidade e pelo desejo constante
-              de aprender, sempre buscando unir teoria e pratica para gerar
-              impacto real.
-            </p>
-            <p className="leading-relaxed text-muted-foreground">
-              Tenho experiencia em trabalho remoto, colaboracao em equipes
-              multidisciplinares e projetos que vao do front-end ao back-end,
-              passando por automacao, banco de dados e infraestrutura de redes.
+        <div className="grid gap-14 lg:grid-cols-2">
+          
+          {/* LEFT */}
+          <div
+            className={`flex flex-col gap-6 transition-all duration-1000 delay-100 ${
+              visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+          >
+            <p className="text-muted-foreground leading-relaxed">
+              Sou <span className="text-foreground font-medium">Kauan Rey</span>,
+              desenvolvedor focado em criar soluções digitais modernas, rápidas
+              e que realmente geram resultado. Meu objetivo não é apenas fazer
+              sites — é construir ferramentas que atraem clientes, automatizam
+              processos e elevam o nível do negócio.
             </p>
 
-            {/* Terminal-style snippet */}
-            <div className="mt-4 rounded-lg border border-border bg-secondary/30 p-4 font-mono text-sm">
+            <p className="text-muted-foreground leading-relaxed">
+              Trabalho com desenvolvimento full-stack, automações, integrações e
+              criação de experiências digitais premium. Cada projeto é pensado
+              estrategicamente para performance, conversão e crescimento.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed">
+              Hoje atuo como freelancer desenvolvendo soluções sob medida,
+              sistemas web, automações e sites modernos para empresas e
+              profissionais que querem crescer no digital.
+            </p>
+
+            {/* Terminal Premium */}
+            <div className="mt-4 rounded-xl border border-border bg-card/40 backdrop-blur-md p-4 font-mono text-sm shadow-[0_0_20px_rgba(34,211,238,0.05)]">
               <div className="flex items-center gap-2 mb-3">
-                <div className="h-3 w-3 rounded-full bg-destructive/60" />
-                <div className="h-3 w-3 rounded-full bg-chart-4/60" />
-                <div className="h-3 w-3 rounded-full bg-chart-2/60" />
+                <div className="h-3 w-3 rounded-full bg-red-400/70" />
+                <div className="h-3 w-3 rounded-full bg-yellow-400/70" />
+                <div className="h-3 w-3 rounded-full bg-green-400/70" />
                 <span className="ml-2 text-xs text-muted-foreground">
                   reydev-terminal
                 </span>
               </div>
-              <div className="flex flex-col gap-1 text-muted-foreground">
-                <div className="flex flex-col gap-1 font-mono text-sm">
-                  <div className="group transition-all">
-                    {/* E-mail e comandos com estilo de terminal */}
-                    <span className="text-primary font-bold glow-text">
-                      kauanrey366@gmail.com
-                    </span>
-                    <span className="text-muted-foreground">:</span>
-                    <span className="text-chart-2">~</span>
-                    <span className="text-muted-foreground">$ </span>
-                    <span className="text-foreground group-hover:text-primary transition-colors">
-                      cat sobre.txt
-                    </span>
-                  </div>
 
-                  {/* Opcional: Adicionar a resposta do comando 'cat' logo abaixo */}
-                  <div className="mt-2 text-muted-foreground leading-relaxed">
-                    {/* Seu texto de descrição aqui */}
-                  </div>
+              <div className="space-y-1 text-muted-foreground">
+                <div>
+                  <span className="text-cyan-400">kauan@reydev</span>:~$ cat
+                  perfil.txt
                 </div>
-                <div className="text-muted-foreground pl-0 mt-1">
-                  {">"} 19 anos | Sao Paulo, SP
-                </div>
-                <div className="text-muted-foreground pl-0">
-                  {">"} FATEC - Redes de Sistemas (3° semestre)
-                </div>
-                <div className="text-muted-foreground pl-0">
-                  {">"} ETEC - Dev. de Sistemas (concluido)
-                </div>
-                <div className="text-muted-foreground pl-0">
-                  {">"} Status: Trabalhando de jovem aprendiz na area de TI e
-                  projetos freelance.
-                </div>
+                <div>{">"} Desenvolvedor Full-Stack</div>
+                <div>{">"} Freelancer — Projetos sob medida</div>
+                <div>{">"} Foco: Performance, Automação e Resultado</div>
+                <div>{">"} São Paulo — Brasil</div>
               </div>
             </div>
           </div>
 
-          {/* Right - highlight cards */}
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {highlights.map((item) => (
+          {/* RIGHT CARDS */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {highlights.map((item, i) => (
               <div
                 key={item.title}
-                className="group rounded-lg border border-border bg-card/50 p-6 transition-all hover:border-primary/30 hover:bg-card glow-border"
+                className={`group rounded-xl border border-border bg-card/40 backdrop-blur-md p-6 transition-all duration-500 hover:border-cyan-400/40 hover:shadow-[0_0_25px_rgba(34,211,238,0.15)] ${
+                  visible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-12"
+                }`}
+                style={{ transitionDelay: `${i * 120}ms` }}
               >
-                <div className="mb-4 inline-flex rounded-lg bg-primary/10 p-3">
-                  <item.icon size={20} className="text-primary" />
+                <div className="mb-4 inline-flex rounded-lg bg-cyan-400/10 p-3 group-hover:bg-cyan-400/20 transition">
+                  <item.icon size={20} className="text-cyan-400" />
                 </div>
+
                 <h3 className="mb-2 font-semibold text-foreground">
                   {item.title}
                 </h3>
+
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {item.description}
                 </p>
@@ -143,5 +153,5 @@ export function About() {
         </div>
       </div>
     </section>
-  );
+  )
 }
