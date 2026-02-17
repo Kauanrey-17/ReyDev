@@ -1,45 +1,51 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { ChevronDown, MapPin, Sparkles, Rocket, MessageCircle } from "lucide-react"
+import { useEffect, useState } from "react";
+import {
+  ChevronDown,
+  MapPin,
+  Sparkles,
+  Rocket,
+  MessageCircle,
+} from "lucide-react";
 
 const roles = [
   "Desenvolvedor Full-Stack",
   "Crio sites que vendem",
   "Automação & Sistemas Web",
   "Soluções digitais sob medida",
-]
+];
 
 export function Hero() {
-  const [currentRole, setCurrentRole] = useState(0)
-  const [displayedText, setDisplayedText] = useState("")
-  const [isDeleting, setIsDeleting] = useState(false)
+  const [currentRole, setCurrentRole] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const role = roles[currentRole]
-    let timeout: NodeJS.Timeout
+    const role = roles[currentRole];
+    let timeout: NodeJS.Timeout;
 
     if (!isDeleting && displayedText.length < role.length) {
       timeout = setTimeout(() => {
-        setDisplayedText(role.slice(0, displayedText.length + 1))
-      }, 55)
+        setDisplayedText(role.slice(0, displayedText.length + 1));
+      }, 55);
     } else if (!isDeleting && displayedText.length === role.length) {
-      timeout = setTimeout(() => setIsDeleting(true), 1600)
+      timeout = setTimeout(() => setIsDeleting(true), 1600);
     } else if (isDeleting && displayedText.length > 0) {
       timeout = setTimeout(() => {
-        setDisplayedText(displayedText.slice(0, -1))
-      }, 25)
+        setDisplayedText(displayedText.slice(0, -1));
+      }, 25);
     } else if (isDeleting && displayedText.length === 0) {
-      setIsDeleting(false)
-      setCurrentRole((prev) => (prev + 1) % roles.length)
+      setIsDeleting(false);
+      setCurrentRole((prev) => (prev + 1) % roles.length);
     }
 
-    return () => clearTimeout(timeout)
-  }, [displayedText, isDeleting, currentRole])
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, currentRole]);
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
-
+    /* ADICIONADO pt-80 PARA DESCER O CONTEÚDO ABAIXO DA NAVEGAÇÃO */
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-80 pb-20">
       {/* GRID BG */}
       <div className="absolute inset-0 opacity-[0.04]">
         <div
@@ -59,16 +65,6 @@ export function Hero() {
       <div className="absolute bottom-1/4 right-1/4 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl animate-pulse" />
 
       <div className="relative z-10 mx-auto max-w-4xl text-center">
-
-        {/* BADGE */}
-        <div className="mb-6 flex justify-center">
-          <div className="flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 backdrop-blur-xl">
-            <Sparkles size={14} className="text-primary" />
-            <span className="font-mono text-xs text-primary">
-              Disponível para projetos freelance
-            </span>
-          </div>
-        </div>
 
         {/* NOME */}
         <h1 className="text-5xl font-bold md:text-7xl">
@@ -93,14 +89,19 @@ export function Hero() {
 
         {/* COPY */}
         <p className="mx-auto mt-6 max-w-2xl text-muted-foreground leading-relaxed">
-          Eu desenvolvo <span className="text-primary">sites profissionais, sistemas web e automações</span> 
-          que ajudam empresas a vender mais, automatizar processos e crescer no digital.  
-          Cada projeto é focado em <span className="text-primary">performance, conversão e resultado real.</span>
+          Eu desenvolvo{" "}
+          <span className="text-primary">
+            sites profissionais, sistemas web e automações
+          </span>
+          {" "}que ajudam empresas a vender mais, automatizar processos e crescer no
+          digital. Cada projeto é focado em{" "}
+          <span className="text-primary">
+            performance, conversão e resultado real.
+          </span>
         </p>
 
         {/* CTA */}
         <div className="mt-8 flex flex-wrap justify-center gap-4">
-
           <a
             href="#contato"
             className="btn-magnetic flex items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-3 font-mono text-sm font-semibold text-black"
@@ -154,5 +155,5 @@ export function Hero() {
         <ChevronDown className="animate-bounce text-primary" size={16} />
       </a>
     </section>
-  )
+  );
 }

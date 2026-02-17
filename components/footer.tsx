@@ -70,12 +70,14 @@ Obrigado.`,
         <div className="grid gap-12 md:grid-cols-2">
           {/* LOGO + STATUS */}
           <div className="flex flex-col gap-6">
-            <div className="relative h-20 w-64">
+            {/* CONTAINER DA LOGO REFORMULADO PARA NÃO CORTAR */}
+            <div className="flex items-center justify-start overflow-visible py-4">
               <Image
                 src="/logo.png"
                 alt="ReyDev"
-                fill
-                className="object-contain object-left scale-150"
+                width={280} // Tamanho real que ela ocupará
+                height={100} // Proporção garantida
+                className="h-auto w-48 md:w-64 object-contain transition-transform hover:scale-105"
                 priority
               />
             </div>

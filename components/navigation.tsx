@@ -10,7 +10,7 @@ const navLinks = [
   { label: "Habilidades", href: "#skills" },
   { label: "Experiência", href: "#experiencia" },
   { label: "Projetos", href: "#projetos" },
-  { label: "Processo", href: "#process" },   // 👈 ADICIONADO
+  { label: "Processo", href: "#process" },
   { label: "Formação", href: "#formacao" },
   { label: "Contato", href: "#contato" },
 ];
@@ -62,58 +62,80 @@ export function Navigation() {
             : "bg-transparent"
         }`}
       >
-        <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-
-          {/* LOGO TECH FIX */}
-          <a href="#" className="group relative flex items-center">
-            <div className="relative h-14 w-48 md:h-16 md:w-56">
-              <Image
-                src="/logo.png"
-                alt="ReyDev"
-                fill
-                className="object-contain scale-110 transition-transform duration-300 group-hover:scale-115"
-                priority
-              />
+        {/* Container principal ajustado para empilhar Logo e Badge corretamente */}
+        <nav className="mx-auto flex max-w-7xl flex-col items-center justify-between px-6 py-4 gap-2">
+          <div className="flex w-full items-center justify-between">
+            {/* LOGO - DIMINUA A LARGURA (w-32 no mobile e md:w-40 no desktop) */}
+            <div className="relative flex flex-col items-center gap-2">
+              <div className="relative flex items-center justify-center overflow-visible">
+                <Image
+                  src="/logo.png"
+                  alt="ReyDev"
+                  width={250}
+                  height={80}
+                  className="h-auto w-32 md:w-40 object-contain"
+                  priority
+                />
+              </div>
             </div>
-          </a>
+            {/* Desktop Links */}
+            <ul className="hidden md:flex items-center gap-8">
+              {navLinks.map((link) => {
+                const section = link.href.replace("#", "");
+                const isActive = activeSection === section;
 
-          {/* Desktop */}
-          <ul className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => {
-              const section = link.href.replace("#", "");
-              const isActive = activeSection === section;
-
-              return (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className={`relative font-mono text-sm transition-all ${
-                      isActive
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-primary"
-                    }`}
-                  >
-                    {link.label}
-
-                    {/* Glow underline */}
-                    <span
-                      className={`absolute left-0 -bottom-1 h-[1px] bg-primary transition-all duration-300 ${
-                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                return (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      className={`relative font-mono text-sm transition-all ${
+                        isActive
+                          ? "text-primary"
+                          : "text-muted-foreground hover:text-primary"
                       }`}
-                    />
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+                    >
+                      {link.label}
+                      <span
+                        className={`absolute left-0 -bottom-1 h-[1px] bg-primary transition-all duration-300 ${
+                          isActive ? "w-full" : "w-0 group-hover:w-full"
+                        }`}
+                      />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
 
-          {/* Mobile Button */}
-          <button
-            className="md:hidden text-foreground"
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-          >
-            {isMobileOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+            {/* Mobile Button */}
+            <button
+              className="md:hidden text-foreground"
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+            >
+              {isMobileOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
+
+          {/* BADGE DISPONÍVEL - Versão Ultra Compacta */}
+          <AnimatePresence>
+            {!isScrolled && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                /* py-0.5 deixa o container extremamente fino */
+                className="flex items-center gap-1.5 rounded-full border border-emerald-500/10 bg-emerald-500/5 px-2.5 py-0.5 backdrop-blur-md"
+              >
+                <span className="relative flex h-1 w-1">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-1 w-1 rounded-full bg-emerald-500" />
+                </span>
+                {/* Fonte reduzida para o mínimo necessário */}
+                <span className="text-[11px] font-semibold uppercase tracking-tight text-emerald-400/90 md:text-xs">
+                  Disponível para novos projetos
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </nav>
 
         {/* Mobile Menu */}
