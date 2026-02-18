@@ -13,6 +13,23 @@ const projects = [
     link: "https://v0-rane-lazer.vercel.app/",
     image: "/project-rane.PNG",
   },
+   {
+    title: "Rane Construção",
+    description:
+      "Site institucional moderno para empresa de construção civil, com foco em autoridade, apresentação de serviços, portfólio de obras e geração de clientes.",
+    tech: ["Next.js", "Tailwind", "SEO", "Responsivo"],
+    link: "https://rane-constru-o.vercel.app", // coloque o link quando publicar
+    image: "/rane-construcao.PNG",
+  },
+
+  {
+    title: "Gerador de Assinaturas de Email",
+    description:
+      "Ferramenta desktop desenvolvida em Python para geração automática de assinaturas profissionais de e-mail padronizadas para empresas. Sistema rápido, leve e automatizado.",
+    tech: ["Python", "Automação", "Desktop Tool"],
+    link: "https://github.com/Kauanrey-17/Gerador-de-assinatura.", // explico abaixo como usar
+    image: "/project-python.png",
+  },
 ];
 
 export function Projects() {
