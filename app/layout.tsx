@@ -32,7 +32,18 @@ export const metadata: Metadata = {
     "Python",
     "Automação",
   ],
-}
+   authors: [{ name: "Kauan Rey" }],
+  creator: "Kauan Rey",
+  metadataBase: new URL("https://rey-dev-xi.vercel.app"),
+  openGraph: {
+    title: "Kauan Rey | Desenvolvedor",
+    description: "Sites profissionais e automações sob medida",
+    url: "https://rey-dev-xi.vercel.app",
+    siteName: "Kauan Rey",
+    locale: "pt_BR",
+    type: "website",
+  },
+};
 
 export const viewport = {
   themeColor: "#06b6d4",
@@ -58,6 +69,7 @@ export default function RootLayout({
         <Particles />
 
         {children}
+
       </body>
     </html>
   )
