@@ -1,43 +1,63 @@
 "use client"
-
+ 
 import { useEffect, useRef, useState } from "react"
-
+ 
 const skillCategories = [
   {
     title: "Linguagens & Core",
     skills: [
       { name: "TypeScript", level: 90 },
-      { name: "JavaScript", level: 85 },
+      { name: "JavaScript", level: 88 },
       { name: "Python", level: 85 },
-      { name: "HTML5 / CSS3", level: 90 },
-      { name: "SQL", level: 75 },
+      { name: "HTML5 / CSS3", level: 92 },
+      { name: "SQL", level: 78 },
     ],
   },
   {
-    title: "Frameworks & APIs",
+    title: "Frameworks & Frontend",
     skills: [
-      { name: "Next.js", level: 85 },
-      { name: "React", level: 80 },
-      { name: "Resend API", level: 90 },
-      { name: "Node.js", level: 70 },
+      { name: "Next.js", level: 88 },
+      { name: "React", level: 85 },
       { name: "TailwindCSS", level: 95 },
+      { name: "Framer Motion", level: 80 },
+      { name: "shadcn/ui", level: 88 },
     ],
   },
   {
-    title: "Integrações & IA",
+    title: "Backend & APIs",
     skills: [
-      { name: "Engenharia de Prompt (IA)", level: 85 },
-      { name: "Conexão com Calendário", level: 80 },
-      { name: "Vercel SDK", level: 75 },
-      { name: "Git", level: 75 },
+      { name: "Node.js", level: 72 },
+      { name: "Resend API", level: 90 },
+      { name: "Prisma ORM", level: 75 },
+      { name: "REST APIs", level: 82 },
+      { name: "Vercel SDK", level: 80 },
     ],
   },
   {
-    title: "Banco de Dados",
+    title: "Banco de Dados & Cloud",
     skills: [
+      { name: "Supabase / PostgreSQL", level: 78 },
       { name: "MySQL", level: 75 },
-      { name: "Supabase / PostgreSQL", level: 70 },
-      { name: "SQL Server", level: 70 },
+      { name: "SQL Server", level: 72 },
+      { name: "Vercel (Deploy)", level: 90 },
+    ],
+  },
+  {
+    title: "IA & Automações",
+    skills: [
+      { name: "Claude AI (Anthropic)", level: 88 },
+      { name: "Engenharia de Prompt", level: 90 },
+      { name: "Automações com IA", level: 82 },
+      { name: "Integração LLMs", level: 78 },
+    ],
+  },
+  {
+    title: "Marketing Digital & Growth",
+    skills: [
+      { name: "Google Ads", level: 65 },
+      { name: "Google Business", level: 70 },
+      { name: "SEO On-Page", level: 75 },
+      { name: "Domínio & DNS", level: 80 },
     ],
   },
   {
@@ -46,54 +66,61 @@ const skillCategories = [
       { name: "Linux", level: 65 },
       { name: "Hardware", level: 70 },
       { name: "Cisco Packet Tracer", level: 65 },
+      { name: "Cabeamento Estruturado", level: 72 },
     ],
   },
   {
-    title: "Design & Office",
+    title: "Design & Produtividade",
     skills: [
-      { name: "Canva", level: 85 },
+      { name: "Canva / UI Design", level: 85 },
       { name: "Pacote Office", level: 90 },
+      { name: "Git / GitHub", level: 78 },
       { name: "Microsoft Visio", level: 65 },
     ],
   },
 ]
-
+ 
 const techTags = [
   "TypeScript",
   "Next.js",
-  "Resend",
-  "IA",
-  "Integração Calendário",
   "React",
+  "Prisma",
+  "Supabase",
   "TailwindCSS",
   "Node.js",
   "Python",
-  "MySQL",
+  "Claude AI",
+  "Prompt Engineering",
   "Vercel",
-  "Supabase",
+  "PostgreSQL",
+  "Google Ads",
+  "SEO",
+  "Git",
   "Linux",
+  "Resend",
+  "shadcn/ui",
 ]
-
+ 
 export function Skills() {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
-
+ 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) setVisible(true)
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     )
-
+ 
     if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
   }, [])
-
+ 
   return (
     <section id="skills" ref={ref} className="relative py-28 px-6">
-      
-      {/* Background grid tech */}
+ 
+      {/* Background grid */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div
           className="h-full w-full"
@@ -104,10 +131,10 @@ export function Skills() {
           }}
         />
       </div>
-
+ 
       <div className="relative mx-auto max-w-6xl">
-        
-        {/* Header premium */}
+ 
+        {/* Header */}
         <div className="mb-20 text-center">
           <p className="font-mono text-sm text-primary tracking-widest uppercase">
             Stack Profissional
@@ -118,33 +145,35 @@ export function Skills() {
               resultado real
             </span>
           </h2>
+          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+            Full-stack, IA, infraestrutura e marketing digital — uma stack completa para construir e escalar produtos digitais.
+          </p>
         </div>
-
+ 
         {/* GRID */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {skillCategories.map((category) => (
             <div
               key={category.title}
-              className="group rounded-xl border border-border bg-card/40 backdrop-blur-sm p-6 transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[0_0_25px_rgba(34,211,238,0.08)]"
+              className="group rounded-xl border border-border bg-card/40 backdrop-blur-sm p-5 transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[0_0_25px_rgba(34,211,238,0.08)]"
             >
-              <h3 className="mb-5 font-mono text-xs tracking-widest uppercase text-cyan-400">
+              <h3 className="mb-4 font-mono text-[11px] tracking-widest uppercase text-cyan-400">
                 {category.title}
               </h3>
-
-              <div className="flex flex-col gap-4">
+ 
+              <div className="flex flex-col gap-3.5">
                 {category.skills.map((skill) => (
                   <div key={skill.name}>
-                    <div className="mb-1 flex justify-between text-sm">
-                      <span>{skill.name}</span>
+                    <div className="mb-1 flex justify-between text-xs">
+                      <span className="text-foreground/90">{skill.name}</span>
                       <span className="font-mono text-muted-foreground">
                         {skill.level}%
                       </span>
                     </div>
-
-                    {/* Barra premium animada */}
-                    <div className="h-2 w-full rounded-full bg-secondary overflow-hidden">
+ 
+                    <div className="h-1.5 w-full rounded-full bg-secondary overflow-hidden">
                       <div
-                        className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-[1800ms] ease-out"
+                        className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-[2000ms] ease-out"
                         style={{
                           width: visible ? `${skill.level}%` : "0%",
                         }}
@@ -156,13 +185,13 @@ export function Skills() {
             </div>
           ))}
         </div>
-
-        {/* TAG CLOUD PREMIUM */}
-        <div className="mt-16 flex flex-wrap justify-center gap-3">
+ 
+        {/* TAG CLOUD */}
+        <div className="mt-14 flex flex-wrap justify-center gap-2.5">
           {techTags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-cyan-400/20 bg-cyan-400/5 px-4 py-1.5 text-xs font-mono text-cyan-300 transition-all hover:border-cyan-400 hover:bg-cyan-400/10 hover:shadow-[0_0_12px_rgba(34,211,238,0.4)]"
+              className="rounded-full border border-cyan-400/20 bg-cyan-400/5 px-4 py-1.5 text-xs font-mono text-cyan-300 transition-all hover:border-cyan-400 hover:bg-cyan-400/10 hover:shadow-[0_0_12px_rgba(34,211,238,0.3)] cursor-default"
             >
               {tag}
             </span>
@@ -171,4 +200,4 @@ export function Skills() {
       </div>
     </section>
   )
-}
+} 
